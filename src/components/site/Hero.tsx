@@ -397,12 +397,12 @@ export function Hero() {
               />
             </motion.div>
 
-            {/* ── Floating Widget 1: Learning Analytics Card (Aligned Top Left outside faces) ── */}
+            {/* ── Floating Widget 1: Learning Analytics Card (Shifted left & down to clear the woman's hair/face) ── */}
             <motion.div
               initial={{ opacity: 0, x: -20, y: -10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.7, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-[-20px] lg:left-[-40px] top-[6%] z-20 hidden md:block w-44 animate-float-card-1"
+              className="absolute left-[-60px] lg:left-[-60px] top-[24%] z-20 hidden md:block w-44 animate-float-card-1"
               style={{ x: card1X, y: card1Y }}
             >
               <div className="rounded-xl border border-border/40 bg-background/80 p-3 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.05),0_16px_32px_-12px_rgba(15,23,42,0.08)] backdrop-blur-md">
@@ -424,12 +424,12 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* ── Floating Widget 2: AI Learning Insights (Aligned Bottom Left below image focal point) ── */}
+            {/* ── Floating Widget 2: AI Learning Insights (Aligned bottom left clearing the laptop) ── */}
             <motion.div
               initial={{ opacity: 0, x: -20, y: 15 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.85, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-[-10px] lg:left-[-24px] bottom-[10%] z-20 hidden md:block w-44 animate-float-card-2"
+              className="absolute left-[-40px] lg:left-[-40px] bottom-[8%] z-20 hidden md:block w-44 animate-float-card-2"
               style={{ x: card2X, y: card2Y }}
             >
               <div className="rounded-xl border border-border/40 bg-background/80 p-3 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.05),0_16px_32px_-12px_rgba(15,23,42,0.08)] backdrop-blur-md">
@@ -453,12 +453,12 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* ── Floating Widget 3: Completion Widget (Aligned Top Right outside faces) ── */}
+            {/* ── Floating Widget 3: Completion Widget (Shifted further right to clear the man's head/shoulders) ── */}
             <motion.div
               initial={{ opacity: 0, x: 20, y: -10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 1.0, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-[-10px] lg:right-[-32px] top-[12%] z-20 hidden md:block w-44 animate-float-card-3"
+              className="absolute right-[-50px] lg:right-[-50px] top-[14%] z-20 hidden md:block w-44 animate-float-card-3"
               style={{ x: card3X, y: card3Y }}
             >
               <div className="rounded-xl border border-border/40 bg-background/80 p-3 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.05),0_16px_32px_-12px_rgba(15,23,42,0.08)] backdrop-blur-md">
