@@ -12,7 +12,7 @@ const groups = [
 export function Audience() {
   const [active, setActive] = useState(0);
   return (
-    <section className="relative border-y border-border bg-surface-1 py-28 md:py-36">
+    <section className="relative border-y border-border bg-surface-1 py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           align="center"

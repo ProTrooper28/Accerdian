@@ -45,7 +45,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative py-28 md:py-36">
+    <section id="faq" className="relative py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <motion.div

@@ -33,7 +33,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative border-y border-border bg-surface-1 py-28 md:py-36"
+      className="relative border-y border-border bg-surface-1 py-20 md:py-24"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

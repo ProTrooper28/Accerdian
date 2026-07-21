@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 export function CTA() {
   return (
-    <section id="contact" className="relative overflow-hidden py-28 md:py-36">
+    <section id="contact" className="relative overflow-hidden py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.98, y: 20 }}
@@ -43,7 +43,7 @@ export function CTA() {
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-[14.5px] font-medium text-background transition-all duration-300 hover:shadow-[0_15px_40px_-15px_var(--primary)]"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-[14.5px] font-semibold text-white transition-all duration-300 hover:shadow-[0_12px_32px_-8px_rgba(0,102,255,0.5)]"
             >
               Enquire Now
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

@@ -404,7 +404,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -30, y: -20 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.7, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-[-10px] top-[15%] z-20 hidden sm:block w-48 animate-float-card-1"
+              className="absolute left-[-32px] lg:left-[-54px] top-[15%] z-20 hidden sm:block w-48 animate-float-card-1"
               style={{ x: card1X, y: card1Y }}
             >
               <div className="rounded-xl border border-border/40 bg-background/70 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl">
@@ -431,7 +431,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -30, y: 30 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.85, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-[15px] bottom-[15%] z-20 hidden sm:block w-44 animate-float-card-2"
+              className="absolute left-[-20px] lg:left-[-36px] bottom-[15%] z-20 hidden sm:block w-44 animate-float-card-2"
               style={{ x: card2X, y: card2Y }}
             >
               <div className="rounded-xl border border-border/45 bg-background/75 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl flex items-center gap-3">
@@ -461,7 +461,7 @@ export function Hero() {
               initial={{ opacity: 0, x: 30, y: -30 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 1.0, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-[-10px] top-[8%] z-20 hidden sm:block w-48 animate-float-card-3"
+              className="absolute right-[-32px] lg:right-[-54px] top-[8%] z-20 hidden sm:block w-48 animate-float-card-3"
               style={{ x: card3X, y: card3Y }}
             >
               <div className="rounded-xl border border-border/40 bg-background/70 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl">
@@ -490,7 +490,7 @@ export function Hero() {
               initial={{ opacity: 0, x: 30, y: 20 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 1.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-[10px] bottom-[20%] z-20 hidden sm:block w-48 animate-float-card-4"
+              className="absolute right-[-24px] lg:right-[-42px] bottom-[20%] z-20 hidden sm:block w-48 animate-float-card-4"
               style={{ x: card4X, y: card4Y }}
             >
               <div className="rounded-xl border border-border/40 bg-background/70 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl">

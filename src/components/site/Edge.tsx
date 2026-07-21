@@ -22,7 +22,7 @@ const pillars = [
 
 export function Edge() {
   return (
-    <section id="edge" className="relative py-28 md:py-36 overflow-hidden">
+    <section id="edge" className="relative py-20 md:py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <motion.div
@@ -52,7 +52,7 @@ export function Edge() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ delay: i * 0.08, duration: 0.8, ease: easeOut }}
-                  className="group relative bg-background p-7 transition-all duration-500 hover:bg-surface-1"
+                  className="group relative bg-background p-6 transition-all duration-500 hover:bg-surface-1"
                 >
                   <div className="flex items-center gap-3">
                     <div className="grid h-8 w-8 place-items-center rounded-lg border border-border bg-surface-1 text-[12px] font-mono text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-primary">

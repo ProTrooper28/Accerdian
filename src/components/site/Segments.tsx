@@ -22,7 +22,7 @@ const segments = [
 
 export function Segments() {
   return (
-    <section className="relative py-28 md:py-36">
+    <section className="relative py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Tailored Course Segmentation"
@@ -41,7 +41,7 @@ export function Segments() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: (i % 2) * 0.08, duration: 0.8, ease: easeOut }}
-              className={`group relative overflow-hidden rounded-2xl border border-border p-8 md:p-10 ${
+              className={`group relative overflow-hidden rounded-2xl border border-border p-6 md:p-8 ${
                 i % 2 === 0 ? "bg-background" : "bg-surface-1"
               }`}
             >

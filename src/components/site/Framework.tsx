@@ -32,7 +32,7 @@ export function Framework() {
   const lineHeight = useTransform(scrollYProgress, [0.05, 0.9], ["0%", "100%"]);
 
   return (
-    <section id="framework" className="relative py-28 md:py-36">
+    <section id="framework" className="relative py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
