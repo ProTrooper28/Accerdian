@@ -33,7 +33,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative border-y border-border bg-surface-1 py-20 md:py-24"
+      className="relative border-y border-border bg-surface-1 py-14 md:py-18"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -53,7 +53,7 @@ export function Testimonials() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.9, ease: easeOut }}
-          className="relative mx-auto mt-16 max-w-4xl"
+          className="relative mx-auto mt-10 max-w-4xl"
         >
           <svg
             className="mx-auto mb-6 h-8 w-8 text-primary/40"
@@ -77,7 +77,7 @@ export function Testimonials() {
             </motion.blockquote>
           </AnimatePresence>
 
-          <div className="mt-10 flex flex-col items-center gap-1">
+          <div className="mt-7 flex flex-col items-center gap-1">
             <div className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-[13px] font-medium">
               {items[i].company[0]}
             </div>
@@ -85,7 +85,7 @@ export function Testimonials() {
             <div className="text-[12.5px] text-muted-foreground">{items[i].author}</div>
           </div>
 
-          <div className="mt-10 flex items-center justify-center gap-2">
+          <div className="mt-7 flex items-center justify-center gap-2">
             {items.map((_, idx) => (
               <button
                 key={idx}

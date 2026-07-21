@@ -47,7 +47,7 @@ function AnimatedNumber({ to, suffix }: { to: number; suffix: string }) {
 
 export function Stats() {
   return (
-    <section className="relative border-y border-border bg-surface-1 py-24 md:py-32">
+    <section className="relative border-y border-border bg-surface-1 py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Our Track Record"
@@ -58,7 +58,7 @@ export function Stats() {
           }
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
           {stats.map((s, i) => (
             <motion.div
               key={i}
@@ -66,18 +66,18 @@ export function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: i * 0.08, duration: 0.7, ease: easeOut }}
-              className="group relative bg-background p-8 transition-colors hover:bg-surface-1 md:p-12"
+              className="group relative bg-background p-6 transition-colors hover:bg-surface-1 md:p-8"
             >
               <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                 0{i + 1}
               </div>
-              <div className="mt-6 text-[56px] font-medium leading-none tracking-[-0.03em] md:text-[72px]">
+              <div className="mt-4 text-[48px] font-medium leading-none tracking-[-0.03em] md:text-[60px]">
                 <AnimatedNumber to={s.value} suffix={s.suffix} />
               </div>
-              <div className="mt-6 text-[15px] font-medium">{s.label}</div>
+              <div className="mt-4 text-[15px] font-medium">{s.label}</div>
               <div className="mt-1 text-[13.5px] text-muted-foreground">{s.note}</div>
 
-              <div className="pointer-events-none absolute inset-x-8 bottom-6 h-px scale-x-0 origin-left bg-gradient-to-r from-primary/60 to-transparent transition-transform duration-700 group-hover:scale-x-100" />
+              <div className="pointer-events-none absolute inset-x-6 bottom-4 h-px scale-x-0 origin-left bg-gradient-to-r from-primary/60 to-transparent transition-transform duration-700 group-hover:scale-x-100" />
             </motion.div>
           ))}
         </div>

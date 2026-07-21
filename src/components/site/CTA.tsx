@@ -2,14 +2,14 @@ import { motion } from "motion/react";
 
 export function CTA() {
   return (
-    <section id="contact" className="relative overflow-hidden py-20 md:py-24">
+    <section id="contact" className="relative overflow-hidden py-14 md:py-18">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.98, y: 20 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-border bg-background px-8 py-20 text-center md:px-16 md:py-28"
+          className="relative overflow-hidden rounded-3xl border border-border bg-background px-8 py-14 text-center md:px-16 md:py-20"
         >
           <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(50%_60%_at_50%_0%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_70%)]" />

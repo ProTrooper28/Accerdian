@@ -22,7 +22,7 @@ const segments = [
 
 export function Segments() {
   return (
-    <section className="relative py-20 md:py-24">
+    <section className="relative py-14 md:py-18">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Tailored Course Segmentation"
@@ -33,7 +33,7 @@ export function Segments() {
             </>
           }
         />
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
           {segments.map((s, i) => (
             <motion.div
               key={i}
@@ -51,13 +51,13 @@ export function Segments() {
                 </span>
                 <span className="font-mono text-[12px] text-muted-foreground">0{i + 1}</span>
               </div>
-              <div className="mt-10 text-[28px] font-medium leading-tight tracking-[-0.02em] md:text-[32px]">
+              <div className="mt-6 text-[28px] font-medium leading-tight tracking-[-0.02em] md:text-[32px]">
                 {s.t}
               </div>
               <div className="mt-3 max-w-md text-[14.5px] leading-relaxed text-muted-foreground">
                 {s.d}
               </div>
-              <div className="mt-8 inline-flex items-center gap-1.5 text-[13.5px] text-foreground/80 transition-colors group-hover:text-foreground">
+              <div className="mt-5 inline-flex items-center gap-1.5 text-[13.5px] text-foreground/80 transition-colors group-hover:text-foreground">
                 View programs
                 <span className="transition-transform duration-500 group-hover:translate-x-1">
                   →

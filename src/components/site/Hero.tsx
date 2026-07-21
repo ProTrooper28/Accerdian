@@ -253,7 +253,7 @@ export function Hero() {
         mx.set(((e.clientX - r.left) / r.width) * 2 - 1);
         my.set(((e.clientY - r.top) / r.height) * 2 - 1);
       }}
-      className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24 lg:min-h-[85vh] flex flex-col justify-between"
+      className="relative overflow-hidden pt-32 pb-10 md:pt-40 md:pb-16 lg:min-h-[85vh] flex flex-col justify-between"
     >
       {/* ── Background layers ── */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -512,12 +512,12 @@ export function Hero() {
       </div>
 
       {/* ── Subtle Trust Row at Bottom of Hero ── */}
-      <div className="w-full border-t border-border/50 bg-background/30 py-6 backdrop-blur-[2px]">
+      <div className="w-full border-t border-border/50 bg-background/30 py-4 backdrop-blur-[2px]">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
             Empowering Teams At Leading Global Enterprises
           </p>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-[0.45] grayscale hover:opacity-75 transition-opacity duration-300">
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-[0.45] grayscale hover:opacity-75 transition-opacity duration-300">
             {partners.map((p) => (
               <span key={p} className="text-[14.5px] font-bold tracking-tight text-foreground">
                 {p}

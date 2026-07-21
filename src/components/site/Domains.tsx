@@ -14,14 +14,14 @@ const domains = [
 
 export function Domains() {
   return (
-    <section id="domains" className="relative border-y border-border bg-surface-2 py-20 md:py-24">
+    <section id="domains" className="relative border-y border-border bg-surface-2 py-14 md:py-18">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           align="center"
           eyebrow="Our Domain Expertise"
           title={<>Specialized programs designed to fuel innovation.</>}
         />
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {domains.map((d, i) => (
             <motion.a
               href="#contact"
@@ -40,7 +40,7 @@ export function Domains() {
                   →
                 </span>
               </div>
-              <div className="mt-8 text-[17px] font-medium tracking-tight">{d.t}</div>
+              <div className="mt-5 text-[17px] font-medium tracking-tight">{d.t}</div>
               <div className="mt-1.5 text-[14px] leading-relaxed text-muted-foreground">{d.d}</div>
 
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px scale-x-0 origin-left bg-gradient-to-r from-transparent via-primary/50 to-transparent transition-transform duration-700 group-hover:scale-x-100" />

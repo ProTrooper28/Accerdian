@@ -12,7 +12,7 @@ const groups = [
 export function Audience() {
   const [active, setActive] = useState(0);
   return (
-    <section className="relative border-y border-border bg-surface-1 py-20 md:py-24">
+    <section className="relative border-y border-border bg-surface-1 py-14 md:py-18">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           align="center"
@@ -24,7 +24,7 @@ export function Audience() {
             </>
           }
         />
-        <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-12">
+        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -32,7 +32,7 @@ export function Audience() {
             transition={{ duration: 0.8, ease: easeOut }}
             className="md:col-span-5"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-background">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border border-border bg-background">
               <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_20%,color-mix(in_oklab,var(--primary)_16%,transparent),transparent_70%)]" />
               <motion.div
                 key={active}
@@ -45,7 +45,7 @@ export function Audience() {
                   <div className="mx-auto grid h-24 w-24 place-items-center rounded-2xl border border-border bg-background/70 backdrop-blur">
                     <div className="text-[36px]">{["◐", "◑", "◒", "◓"][active]}</div>
                   </div>
-                  <div className="mt-8 text-[24px] font-medium tracking-[-0.02em] md:text-[28px]">
+                  <div className="mt-6 text-[24px] font-medium tracking-[-0.02em] md:text-[28px]">
                     {groups[active].t}
                   </div>
                   <div className="mt-3 max-w-xs mx-auto text-[14px] leading-relaxed text-muted-foreground">

@@ -13,7 +13,7 @@ function Logo({ name }: { name: string }) {
 
 export function Partners() {
   return (
-    <section className="relative py-24 md:py-28">
+    <section className="relative py-14 md:py-16">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           align="center"
@@ -26,7 +26,7 @@ export function Partners() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.8, ease: easeOut }}
-          className="relative mt-14 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+          className="relative mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
         >
           <div className="flex w-max animate-marquee">
             {[...partners, ...partners].map((p, i) => (
