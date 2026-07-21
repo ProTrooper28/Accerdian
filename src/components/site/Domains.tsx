@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Lightbulb, BrainCircuit, Users, ChartColumn, Settings, Globe, CreditCard } from "lucide-react";
-import { easeOut } from "./util";
+import { easeOut, SpotlightCard } from "./util";
 
 const domains = [
   { t: "Product & Innovation Hub", icon: <Lightbulb className="w-14 h-14 text-[#3182ce]" strokeWidth={2.5} /> },
@@ -45,12 +45,14 @@ export function Domains() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: (i % 3) * 0.08, duration: 0.8, ease: easeOut }}
-              className="bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-8 flex flex-col items-center justify-center w-[calc(33.333%-1.5rem)] min-w-[280px] hover:-translate-y-2 transition-all duration-300 cursor-pointer border border-gray-50"
+              className="w-[calc(33.333%-1.5rem)] min-w-[280px]"
             >
-              <div className="mb-5">
-                {d.icon}
-              </div>
-              <h4 className="font-bold text-[#1a202c] text-[1.1rem] text-center">{d.t}</h4>
+              <SpotlightCard className="p-8 flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300 cursor-pointer shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                <div className="mb-5">
+                  {d.icon}
+                </div>
+                <h4 className="font-bold text-[#1a202c] text-[1.1rem] text-center">{d.t}</h4>
+              </SpotlightCard>
             </motion.div>
           ))}
         </div>

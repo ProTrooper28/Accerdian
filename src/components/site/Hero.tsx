@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { CircleCheck } from "lucide-react";
 import accredianProfessionals from "@/assets/accredian_professionals.png";
 import { useEnquiryModal } from "@/hooks/useEnquiryModal";
+import { RippleButton } from "./util";
 
 /* ─── CountUp (triggers on view) ─── */
 function CountUp({
@@ -162,12 +163,12 @@ export function Hero() {
 
           {/* CTA */}
           <motion.div variants={fadeUp}>
-            <button
+            <RippleButton
               onClick={() => openModal()}
-              className="bg-[#3182ce] text-white px-9 py-3.5 rounded-xl font-semibold text-lg shadow-[0_4px_20px_rgba(49,130,206,0.35)] transition-all duration-300 hover:bg-[#2b6cb0] hover:shadow-[0_8px_28px_rgba(49,130,206,0.45)] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#3182ce]/50 focus:ring-offset-2"
+              className="bg-[#3182ce] text-white px-9 py-3.5 rounded-xl font-semibold text-lg shadow-[0_4px_20px_rgba(49,130,206,0.35)] hover:bg-[#2b6cb0] hover:shadow-[0_8px_28px_rgba(49,130,206,0.45)] focus:outline-none focus:ring-2 focus:ring-[#3182ce]/50 focus:ring-offset-2"
             >
               Enquire Now
-            </button>
+            </RippleButton>
           </motion.div>
         </motion.div>
 

@@ -1,5 +1,5 @@
 import { motion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import { type ReactNode, useRef, useState, useEffect } from "react";
 
 export const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -50,5 +50,121 @@ export function SectionHeading({
         </p>
       )}
     </motion.div>
+  );
+}
+
+/* ─── Premium Ripple Click Button ─── */
+interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  className?: string;
+  rippleColor?: string;
+}
+
+export function RippleButton({
+  children,
+  className = "",
+  rippleColor = "rgba(255, 255, 255, 0.35)",
+  onClick,
+  ...props
+}: RippleButtonProps) {
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number; size: number }[]>([]);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const createRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!buttonRef.current) return;
+
+    const rect = buttonRef.current.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 2;
+    const x = e.clientX - rect.left - size / 2;
+    const y = e.clientY - rect.top - size / 2;
+
+    const newRipple = {
+      id: Date.now(),
+      x,
+      y,
+      size,
+    };
+
+    setRipples((prev) => [...prev, newRipple]);
+    if (onClick) onClick(e);
+  };
+
+  useEffect(() => {
+    if (ripples.length === 0) return;
+    const timer = setTimeout(() => {
+      setRipples((prev) => prev.slice(1));
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [ripples]);
+
+  return (
+    <button
+      ref={buttonRef}
+      onClick={createRipple}
+      className={`relative overflow-hidden transition-all active:scale-[0.98] ${className}`}
+      {...props}
+    >
+      <span className="relative z-10">{children}</span>
+      {ripples.map((r) => (
+        <span
+          key={r.id}
+          className="absolute rounded-full pointer-events-none animate-ripple"
+          style={{
+            left: r.x,
+            top: r.y,
+            width: r.size,
+            height: r.size,
+            backgroundColor: rippleColor,
+            animation: "ripple 600ms cubic-bezier(0.1, 0.8, 0.3, 1) forwards",
+          }}
+        />
+      ))}
+    </button>
+  );
+}
+
+/* ─── Spotlight Card (Cursor Spotlight border/glow) ─── */
+interface SpotlightCardProps {
+  children: ReactNode;
+  className?: string;
+  glowColor?: string;
+}
+
+export function SpotlightCard({
+  children,
+  className = "",
+  glowColor = "rgba(49, 130, 206, 0.12)",
+}: SpotlightCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setCoords({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsFocused(true)}
+      onMouseLeave={() => setIsFocused(false)}
+      className={`relative overflow-hidden rounded-xl border border-gray-100/80 bg-white ${className}`}
+    >
+      {/* Dynamic spotlight layer */}
+      <div
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300"
+        style={{
+          opacity: isFocused ? 1 : 0,
+          background: `radial-gradient(400px circle at ${coords.x}px ${coords.y}px, ${glowColor}, transparent 80%)`,
+        }}
+      />
+      <div className="relative z-10">{children}</div>
+    </div>
   );
 }

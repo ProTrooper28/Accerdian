@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { useEnquiryModal } from "@/hooks/useEnquiryModal";
+import { RippleButton } from "./util";
 
 export function CTA() {
   const { openModal } = useEnquiryModal();
@@ -61,19 +62,20 @@ export function CTA() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <button
+            <RippleButton
               onClick={() => openModal()}
-              className="group inline-flex items-center gap-2 rounded-xl bg-[#3182ce] px-8 py-3.5 text-[16px] font-semibold text-white shadow-[0_4px_20px_rgba(49,130,206,0.35)] transition-all duration-300 hover:bg-[#2b6cb0] hover:shadow-[0_8px_28px_rgba(49,130,206,0.45)] active:scale-[0.98] outline-none"
+              className="group inline-flex items-center gap-2 rounded-xl bg-[#3182ce] px-8 py-3.5 text-[16px] font-semibold text-white shadow-[0_4px_20px_rgba(49,130,206,0.35)] hover:bg-[#2b6cb0] hover:shadow-[0_8px_28px_rgba(49,130,206,0.45)] outline-none"
             >
               Enquire Now
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </button>
-            <button
+            </RippleButton>
+            <RippleButton
               onClick={handleExpertScroll}
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-8 py-3.5 text-[16px] font-semibold text-[#4a5568] hover:border-gray-300 hover:text-gray-900 active:scale-[0.98] transition-all outline-none"
+              rippleColor="rgba(0, 0, 0, 0.05)"
+              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-8 py-3.5 text-[16px] font-semibold text-[#4a5568] hover:border-gray-300 hover:text-gray-900 transition-all outline-none"
             >
               Talk to an expert
-            </button>
+            </RippleButton>
           </div>
         </motion.div>
       </div>
