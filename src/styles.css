@@ -202,11 +202,83 @@
   100% { background-position: 200% 0; }
 }
 
+@keyframes float-dashboard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes float-card-1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-7px) rotate(0.3deg); }
+  66% { transform: translateY(-3px) rotate(-0.2deg); }
+}
+
+@keyframes float-card-2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  40% { transform: translateY(-9px) rotate(-0.4deg); }
+  70% { transform: translateY(-4px) rotate(0.2deg); }
+}
+
+@keyframes float-card-3 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-5px) rotate(0.2deg); }
+  60% { transform: translateY(-10px) rotate(-0.3deg); }
+}
+
+@keyframes particle-drift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  10% { opacity: var(--particle-opacity, 0.2); }
+  90% { opacity: var(--particle-opacity, 0.2); }
+  100% { transform: translate(var(--drift-x, 40px), var(--drift-y, -60px)) scale(0.5); opacity: 0; }
+}
+
+@keyframes shimmer-text {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px -4px color-mix(in oklab, var(--primary) 40%, transparent); }
+  50% { box-shadow: 0 0 32px -2px color-mix(in oklab, var(--primary) 60%, transparent); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+@keyframes border-glow {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.3; }
+}
+
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
 .animate-float-slow {
   animation: float-slow 6s ease-in-out infinite;
+}
+.animate-float-dashboard {
+  animation: float-dashboard 8s ease-in-out infinite;
+}
+.animate-float-card-1 {
+  animation: float-card-1 7s ease-in-out infinite;
+}
+.animate-float-card-2 {
+  animation: float-card-2 9s ease-in-out infinite;
+}
+.animate-float-card-3 {
+  animation: float-card-3 6s ease-in-out infinite;
+}
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+.animate-ripple {
+  animation: ripple 2s ease-out infinite;
+}
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
