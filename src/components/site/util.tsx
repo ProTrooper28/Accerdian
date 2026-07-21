@@ -108,15 +108,16 @@ export function RippleButton({
       {ripples.map((r) => (
         <span
           key={r.id}
-          className="absolute rounded-full pointer-events-none animate-ripple"
-          style={{
-            left: r.x,
-            top: r.y,
-            width: r.size,
-            height: r.size,
-            backgroundColor: rippleColor,
-            animation: "ripple 600ms cubic-bezier(0.1, 0.8, 0.3, 1) forwards",
-          }}
+          className="click-ripple"
+          style={
+            {
+              left: r.x,
+              top: r.y,
+              width: r.size,
+              height: r.size,
+              "--ripple-bg": rippleColor,
+            } as React.CSSProperties
+          }
         />
       ))}
     </button>
@@ -133,7 +134,7 @@ interface SpotlightCardProps {
 export function SpotlightCard({
   children,
   className = "",
-  glowColor = "rgba(49, 130, 206, 0.12)",
+  glowColor = "rgba(49, 130, 206, 0.28)",
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -154,14 +155,14 @@ export function SpotlightCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsFocused(true)}
       onMouseLeave={() => setIsFocused(false)}
-      className={`relative overflow-hidden rounded-xl border border-gray-100/80 bg-white ${className}`}
+      className={`relative overflow-hidden rounded-xl border border-gray-200 bg-white ${className}`}
     >
       {/* Dynamic spotlight layer */}
       <div
-        className="pointer-events-none absolute -inset-px transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-0"
         style={{
           opacity: isFocused ? 1 : 0,
-          background: `radial-gradient(400px circle at ${coords.x}px ${coords.y}px, ${glowColor}, transparent 80%)`,
+          background: `radial-gradient(350px circle at ${coords.x}px ${coords.y}px, ${glowColor}, transparent 80%)`,
         }}
       />
       <div className="relative z-10">{children}</div>

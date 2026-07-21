@@ -323,16 +323,24 @@
   }
 }
 
-@keyframes ripple {
+@keyframes ripple-effect {
   0% {
-    transform: scale(1);
-    opacity: 0.6;
+    transform: scale(0);
+    opacity: 0.65;
   }
 
   100% {
-    transform: scale(3);
+    transform: scale(2.5);
     opacity: 0;
   }
+}
+
+.click-ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background-color: var(--ripple-bg, rgba(255, 255, 255, 0.45));
+  animation: ripple-effect 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
 
 @keyframes border-glow {
