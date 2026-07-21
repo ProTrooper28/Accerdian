@@ -30,7 +30,8 @@ function CountUp({
             const p = Math.min(1, (t - t0) / (duration * 1000));
             const eased = 1 - Math.pow(1 - p, 3);
             const v = eased * to;
-            if (el) el.textContent = v.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix;
+            if (el)
+              el.textContent = v.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix;
             if (p < 1) requestAnimationFrame(step);
           };
           requestAnimationFrame(step);
@@ -195,16 +196,18 @@ function Particles({ count = 18 }: { count?: number }) {
         <div
           key={p.id}
           className="absolute rounded-full bg-primary/40"
-          style={{
-            left: p.left,
-            top: p.top,
-            width: p.size,
-            height: p.size,
-            "--drift-x": `${p.driftX}px`,
-            "--drift-y": `${p.driftY}px`,
-            "--particle-opacity": p.opacity,
-            animation: `particle-drift ${p.duration}s ${p.delay}s ease-in-out infinite`,
-          } as React.CSSProperties}
+          style={
+            {
+              left: p.left,
+              top: p.top,
+              width: p.size,
+              height: p.size,
+              "--drift-x": `${p.driftX}px`,
+              "--drift-y": `${p.driftY}px`,
+              "--particle-opacity": p.opacity,
+              animation: `particle-drift ${p.duration}s ${p.delay}s ease-in-out infinite`,
+            } as React.CSSProperties
+          }
         />
       ))}
     </div>
@@ -267,7 +270,10 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_40%,var(--surface-1))]" />
 
         {/* Dot grid */}
-        <svg className="absolute inset-0 h-full w-full opacity-[0.3]" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="absolute inset-0 h-full w-full opacity-[0.3]"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <pattern id="hero-dot-grid" width="32" height="32" patternUnits="userSpaceOnUse">
               <circle cx="1" cy="1" r="0.6" fill="currentColor" className="text-foreground/20" />
@@ -323,12 +329,15 @@ export function Hero() {
             variants={fadeUp}
             className="mx-auto mt-6 max-w-lg text-balance text-[16px] leading-[1.7] text-muted-foreground md:text-[18px]"
           >
-            Cultivate high‑performance teams through expert learning — tailored solutions,
-            industry insights, and measurable impact.
+            Cultivate high‑performance teams through expert learning — tailored solutions, industry
+            insights, and measurable impact.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <motion.div
+            variants={fadeUp}
+            className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          >
             <MagneticCTA
               href="#contact"
               variant="primary"
@@ -354,33 +363,34 @@ export function Hero() {
             variants={fadeUp}
             className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 text-[13px] text-muted-foreground"
           >
-            {["Tailored Solutions", "Industry Insights", "Expert Guidance", "Measurable Impact"].map(
-              (f, i) => (
-                <motion.span
-                  key={f}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="inline-flex items-center gap-2"
-                >
-                  <span className="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-primary/10">
-                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                      <path
-                        d="M2.5 6.5L5 9L9.5 3.5"
-                        stroke="var(--primary)"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  {f}
-                  {i < 3 && (
-                    <span className="ml-3 hidden h-3 w-px bg-border/60 sm:inline-block" />
-                  )}
-                </motion.span>
-              ),
-            )}
+            {[
+              "Tailored Solutions",
+              "Industry Insights",
+              "Expert Guidance",
+              "Measurable Impact",
+            ].map((f, i) => (
+              <motion.span
+                key={f}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2"
+              >
+                <span className="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-primary/10">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                    <path
+                      d="M2.5 6.5L5 9L9.5 3.5"
+                      stroke="var(--primary)"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                {f}
+                {i < 3 && <span className="ml-3 hidden h-3 w-px bg-border/60 sm:inline-block" />}
+              </motion.span>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -493,8 +503,20 @@ export function Hero() {
                 <span className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
                   ROI
                 </span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-primary">
-                  <path d="M7 2v10M4 5l3-3 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  className="text-primary"
+                >
+                  <path
+                    d="M7 2v10M4 5l3-3 3 3"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
               <div className="mt-2 text-[28px] font-semibold tracking-tight">

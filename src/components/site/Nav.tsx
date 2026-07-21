@@ -11,7 +11,15 @@ const links = [
 
 const sectionIds = links.map((l) => l.href.replace("#", ""));
 
-function MagneticButton({ children, className, href }: { children: React.ReactNode; className: string; href: string }) {
+function MagneticButton({
+  children,
+  className,
+  href,
+}: {
+  children: React.ReactNode;
+  className: string;
+  href: string;
+}) {
   const ref = useRef<HTMLAnchorElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -139,9 +147,7 @@ export function Nav() {
                     key={l.href}
                     href={l.href}
                     className={`group relative rounded-full px-3.5 py-1.5 text-[13px] transition-colors duration-200 ${
-                      isActive
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                      isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {l.label}
@@ -176,7 +182,9 @@ export function Nav() {
                 }`}
               >
                 Enquire
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                  →
+                </span>
               </MagneticButton>
             </div>
           </div>
