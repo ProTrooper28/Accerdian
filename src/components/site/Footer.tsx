@@ -21,12 +21,12 @@ export function Footer() {
           className="grid grid-cols-2 gap-10 md:grid-cols-12"
         >
           <div className="col-span-2 md:col-span-4">
-            <div className="flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-white text-[13px] font-semibold text-black">
-                A
+            <div className="flex flex-col justify-center mb-4">
+              <span className="text-[#3182ce] font-bold text-3xl tracking-tight leading-none mb-1">
+                accredian
               </span>
-              <span className="text-[15px] font-medium tracking-tight">
-                Accredian <span className="text-white/50">Enterprise</span>
+              <span className="text-white/40 text-[10px] tracking-widest uppercase font-medium">
+                credentials that matter
               </span>
             </div>
             <p className="mt-5 max-w-xs text-[13.5px] leading-relaxed text-white/55">

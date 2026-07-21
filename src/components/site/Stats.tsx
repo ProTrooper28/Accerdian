@@ -1,29 +1,22 @@
 import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { GraduationCap, Presentation, Users } from "lucide-react";
-import { SectionHeading, easeOut } from "./util";
+import { easeOut } from "./util";
 
 const stats = [
   {
     value: 10000,
-    suffix: "+",
-    label: "Professionals trained",
-    note: "for exceptional career success",
-    icon: <GraduationCap className="h-4 w-4" />,
+    suffix: "K+",
+    label: "Professionals Trained For Exceptional Career Success",
   },
   {
     value: 200,
     suffix: "+",
-    label: "Sessions delivered",
-    note: "with unmatched learning excellence",
-    icon: <Presentation className="h-4 w-4" />,
+    label: "Sessions Delivered With Unmatched Learning Excellence",
   },
   {
     value: 5000,
-    suffix: "+",
-    label: "Active learners",
-    note: "engaged in dynamic courses",
-    icon: <Users className="h-4 w-4" />,
+    suffix: "K+",
+    label: "Active Learners Engaged In Dynamic Courses",
   },
 ];
 
@@ -36,65 +29,76 @@ function AnimatedNumber({ to, suffix }: { to: number; suffix: string }) {
     const t0 = performance.now();
     const dur = 1800;
     let raf = 0;
+    const display = to >= 1000 ? to / 1000 : to;
     const step = (t: number) => {
       const p = Math.min(1, (t - t0) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
-      setV(Math.round(to * eased));
+      setV(Math.round(display * eased));
       if (p < 1) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
   }, [inView, to]);
-  const display = to >= 1000 ? `${Math.floor(v / 1000)}${v >= 1000 ? "K" : ""}` : `${v}`;
   return (
     <span ref={ref}>
-      {display}
-      {suffix}
+      {v}{suffix}
     </span>
   );
 }
 
 export function Stats() {
   return (
-    <section className="relative border-y border-border bg-surface-1 py-16 md:py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeading
-          eyebrow="Our Track Record"
-          title={
-            <>
-              The numbers behind <span className="text-muted-foreground">our success.</span>
-            </>
-          }
-        />
+    <section id="stats" className="py-24 relative overflow-hidden">
+      {/* Background glows */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#3182ce] blur-[90px] opacity-[0.04] pointer-events-none" />
+      <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full bg-[#63b3ed] blur-[80px] opacity-[0.04] pointer-events-none" />
 
-        <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: easeOut }}
+          className="text-[2.5rem] font-bold text-[#1a202c] mb-3"
+        >
+          Our <span className="text-[#3182ce]">Track Record</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.7, ease: easeOut }}
+          className="text-[1.3rem] text-[#4a5568] mb-20 font-medium"
+        >
+          The Numbers Behind <span className="text-[#3182ce]">Our Success</span>
+        </motion.p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {stats.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.08, duration: 0.7, ease: easeOut }}
-              className="group relative bg-background p-6 transition-all duration-500 hover:bg-surface-1 md:p-8"
+              transition={{ delay: i * 0.12, duration: 0.8, ease: easeOut }}
+              className={`flex flex-col items-center px-8 pb-8 ${
+                i < stats.length - 1 ? "md:border-r border-gray-200" : ""
+              }`}
             >
-              {/* Top accent line - reveals on hover */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px scale-x-0 origin-center bg-gradient-to-r from-transparent via-primary/60 to-transparent transition-transform duration-700 group-hover:scale-x-100" />
-
-              <div className="flex items-center gap-2.5">
-                <div className="grid h-7 w-7 place-items-center rounded-lg border border-border bg-surface-1 text-primary/70 transition-all duration-500 group-hover:border-primary/25 group-hover:text-primary group-hover:bg-primary/5">
-                  {s.icon}
+              {/* Pill counter */}
+              <div className="relative mb-8">
+                <div className="absolute inset-[-10px] rounded-full border-2 border-[#3182ce] opacity-60 animate-border-glow" />
+                <div className="group bg-[#ebf8ff] text-[#3182ce] text-[2rem] font-bold py-3 px-12 rounded-full cursor-default select-none min-w-[180px] text-center transition-all duration-300 hover:bg-[#3182ce] hover:text-white hover:shadow-[0_12px_32px_rgba(49,130,206,0.3)]">
+                  <AnimatedNumber to={s.value} suffix={s.suffix} />
                 </div>
-                <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                  0{i + 1}
-                </span>
               </div>
-              <div className="mt-4 text-[48px] font-medium leading-none tracking-[-0.03em] text-foreground md:text-[56px]">
-                <AnimatedNumber to={s.value} suffix={s.suffix} />
-              </div>
-              <div className="mt-3 text-[15px] font-semibold">{s.label}</div>
-              <div className="mt-0.5 text-[13px] text-muted-foreground">{s.note}</div>
 
-              <div className="pointer-events-none absolute inset-x-6 bottom-4 h-px scale-x-0 origin-left bg-gradient-to-r from-primary/50 to-transparent transition-transform duration-700 group-hover:scale-x-100" />
+              {/* Accent line */}
+              <div className="h-[3px] w-16 rounded-full bg-gradient-to-r from-transparent via-[#3182ce] to-transparent mb-5" />
+
+              <p className="text-[#2d3748] font-medium text-lg leading-snug max-w-[250px]">
+                {s.label}
+              </p>
             </motion.div>
           ))}
         </div>

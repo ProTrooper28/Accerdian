@@ -1,74 +1,77 @@
 import { motion } from "motion/react";
-import { Award, Building2, BookOpen, BarChart } from "lucide-react";
-import { SectionHeading, easeOut } from "./util";
+import { easeOut } from "./util";
 
 const segments = [
-  { t: "Program Specific", d: "Certificate, Executive, Post Graduate Certificate", tag: "Format", icon: <Award className="h-3.5 w-3.5" /> },
   {
-    t: "Industry Specific",
+    t: "Program\nSpecific",
+    d: "Certificate, Executive, Post Graduate Certificate",
+    color: "from-blue-50 to-blue-100/50",
+  },
+  {
+    t: "Industry\nSpecific",
     d: "IT, Healthcare, Retail, Finance, Education, Manufacturing",
-    tag: "Vertical",
-    icon: <Building2 className="h-3.5 w-3.5" />,
+    color: "from-indigo-50 to-indigo-100/50",
   },
   {
     t: "Topic Specific",
     d: "Machine Learning, Design, Analytics, Cybersecurity, Cloud",
-    tag: "Skill",
-    icon: <BookOpen className="h-3.5 w-3.5" />,
+    color: "from-sky-50 to-sky-100/50",
   },
   {
     t: "Level Specific",
     d: "Senior Leadership, Mid‑Career Professionals, Freshers",
-    tag: "Seniority",
-    icon: <BarChart className="h-3.5 w-3.5" />,
+    color: "from-cyan-50 to-cyan-100/50",
   },
 ];
 
 export function Segments() {
   return (
-    <section className="relative py-14 md:py-18">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeading
-          eyebrow="Tailored Course Segmentation"
-          title={
-            <>
-              Custom‑fit courses designed to{" "}
-              <span className="text-muted-foreground">address every focus.</span>
-            </>
-          }
-        />
-        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: easeOut }}
+            className="text-[2.5rem] font-bold text-[#1a202c] mb-3"
+          >
+            Tailored <span className="text-[#3182ce]">Course Segmentation</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.7, ease: easeOut }}
+            className="text-[1.2rem] text-[#4a5568] font-medium"
+          >
+            Explore <span className="text-[#3182ce]">Custom-fit Courses</span> Designed to Address Every Professional Focus
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {segments.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -32 : 32 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: (i % 2) * 0.08, duration: 0.8, ease: easeOut }}
-              className={`group relative overflow-hidden rounded-2xl border border-border p-6 transition-all duration-500 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-[0_0_0_1px_color-mix(in_oklab,var(--primary)_10%,transparent),0_12px_36px_-12px_rgba(0,102,255,0.1)] ${
-                i % 2 === 0 ? "bg-background" : "bg-surface-1"
-              }`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.08, duration: 0.7, ease: easeOut }}
+              className="bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden flex flex-col h-full border border-gray-50 pb-8 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                  {s.icon}
-                  {s.tag}
-                </span>
-                <span className="font-mono text-[12px] text-muted-foreground/50">0{i + 1}</span>
+              {/* Gradient placeholder for image area */}
+              <div className={`h-[220px] relative mb-6 bg-gradient-to-br ${s.color} flex items-center justify-center`}>
+                <div className="text-[#3182ce] text-6xl font-bold opacity-10">
+                  0{i + 1}
+                </div>
               </div>
-              <div className="mt-5 text-[26px] font-semibold leading-tight tracking-[-0.02em] md:text-[30px]">
+
+              <h3 className="text-[#3182ce] text-2xl font-bold mb-4 px-6 leading-tight whitespace-pre-line">
                 {s.t}
-              </div>
-              <div className="mt-2 max-w-md text-[14px] leading-relaxed text-muted-foreground">
+              </h3>
+              <p className="text-[#4a5568] text-[15px] px-6 leading-relaxed font-medium">
                 {s.d}
-              </div>
-              <div className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-primary/80 transition-all duration-500 group-hover:text-primary group-hover:gap-2.5">
-                View programs
-                <span className="transition-transform duration-500 group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-              <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--primary)_10%,transparent),transparent)] opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100" />
+              </p>
             </motion.div>
           ))}
         </div>

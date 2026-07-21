@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { SectionHeading, easeOut } from "./util";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const items = [
   {
@@ -30,10 +31,18 @@ export function Testimonials() {
     return () => clearInterval(id);
   }, [paused]);
 
+  const handlePrev = () => {
+    setI((x) => (x - 1 + items.length) % items.length);
+  };
+
+  const handleNext = () => {
+    setI((x) => (x + 1) % items.length);
+  };
+
   return (
     <section
       id="testimonials"
-      className="relative border-y border-border bg-surface-1 py-14 md:py-18"
+      className="relative py-24 bg-white"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -49,53 +58,74 @@ export function Testimonials() {
         />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 24 }}
+          initial={{ opacity: 0, scale: 0.98, y: 24 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.9, ease: easeOut }}
-          className="relative mx-auto mt-10 max-w-4xl"
+          className="relative mx-auto mt-16 max-w-4xl bg-gradient-to-br from-[#1875f0] to-[#3182ce] rounded-3xl p-10 md:p-16 text-white shadow-xl"
         >
-          <svg
-            className="mx-auto mb-6 h-8 w-8 text-primary/40"
-            viewBox="0 0 32 32"
-            fill="currentColor"
-            aria-hidden
-          >
-            <path d="M9 8c-3 0-6 2-6 6 0 4 3 6 6 6-1 3-3 4-5 4v2c5 0 9-3 9-9V8H9zm14 0c-3 0-6 2-6 6 0 4 3 6 6 6-1 3-3 4-5 4v2c5 0 9-3 9-9V8h-4z" />
-          </svg>
-
-          <AnimatePresence mode="wait">
-            <motion.blockquote
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.7, ease: easeOut }}
-              className="text-balance text-center text-[22px] font-medium leading-[1.35] tracking-[-0.015em] md:text-[30px]"
+          {/* Decorative quote icon */}
+          <div className="absolute top-8 left-8 text-white/10 pointer-events-none">
+            <svg
+              className="h-20 w-20 fill-current"
+              viewBox="0 0 32 32"
+              aria-hidden
             >
-              "{items[i].q}"
-            </motion.blockquote>
-          </AnimatePresence>
-
-          <div className="mt-7 flex flex-col items-center gap-1">
-            <div className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-[13px] font-medium">
-              {items[i].company[0]}
-            </div>
-            <div className="mt-2 text-[14px] font-medium">{items[i].company}</div>
-            <div className="text-[12.5px] text-muted-foreground">{items[i].author}</div>
+              <path d="M9 8c-3 0-6 2-6 6 0 4 3 6 6 6-1 3-3 4-5 4v2c5 0 9-3 9-9V8H9zm14 0c-3 0-6 2-6 6 0 4 3 6 6 6-1 3-3 4-5 4v2c5 0 9-3 9-9V8h-4z" />
+            </svg>
           </div>
 
-          <div className="mt-7 flex items-center justify-center gap-2">
-            {items.map((_, idx) => (
+          <div className="relative z-10">
+            <AnimatePresence mode="wait">
+              <motion.blockquote
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.7, ease: easeOut }}
+                className="text-balance text-center text-[1.4rem] md:text-[1.7rem] font-medium leading-[1.4] tracking-[-0.015em]"
+              >
+                "{items[i].q}"
+              </motion.blockquote>
+            </AnimatePresence>
+
+            <div className="mt-10 flex flex-col items-center gap-1 border-t border-white/10 pt-8">
+              <div className="grid h-12 w-12 place-items-center rounded-full bg-white/10 border border-white/10 text-[15px] font-bold text-white shadow-sm">
+                {items[i].company[0]}
+              </div>
+              <div className="mt-3 text-[16px] font-bold tracking-wide">{items[i].company}</div>
+              <div className="text-[14px] text-blue-100 font-medium">{items[i].author}</div>
+            </div>
+
+            {/* Navigation arrows */}
+            <div className="mt-8 flex items-center justify-center gap-6">
               <button
-                key={idx}
-                onClick={() => setI(idx)}
-                aria-label={`Go to testimonial ${idx + 1}`}
-                className={`h-1 rounded-full transition-all duration-500 ${
-                  idx === i ? "w-8 bg-foreground" : "w-4 bg-border hover:bg-muted-foreground/40"
-                }`}
-              />
-            ))}
+                onClick={handlePrev}
+                className="p-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 active:scale-95 transition-all text-white outline-none focus:ring-2 focus:ring-white/50"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <div className="flex gap-2">
+                {items.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setI(idx)}
+                    aria-label={`Go to testimonial ${idx + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-500 ${
+                      idx === i ? "w-8 bg-white" : "w-3 bg-white/30 hover:bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={handleNext}
+                className="p-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 active:scale-95 transition-all text-white outline-none focus:ring-2 focus:ring-white/50"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </motion.div>
       </div>

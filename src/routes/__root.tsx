@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { EnquiryModalProvider } from "@/hooks/useEnquiryModal";
+import { EnquiryModal } from "@/components/ui/EnquiryModal";
 
 function NotFoundComponent() {
   return (
@@ -77,13 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Accredian Enterprise — Next-Gen Expertise for Your Enterprise" },
+      { title: "Accredian | Next-Gen Expertise For Your Enterprise" },
       {
         name: "description",
         content:
           "Cultivate high-performance teams through expert learning. Tailored enterprise training in leadership, tech, data, fintech, and generative AI.",
       },
-      { property: "og:title", content: "Accredian Enterprise — Next-Gen Expertise for Your Enterprise" },
+      { property: "og:title", content: "Accredian | Next-Gen Expertise For Your Enterprise" },
       { property: "og:description", content: "Tailored corporate learning programs that build measurable, high-performance teams." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -121,8 +123,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <EnquiryModalProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        <EnquiryModal />
+      </EnquiryModalProvider>
     </QueryClientProvider>
   );
 }

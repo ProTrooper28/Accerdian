@@ -1,6 +1,8 @@
-import { motion, useMotionValue, useSpring, useTransform, type Variants } from "motion/react";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { motion, type Variants } from "motion/react";
+import { useEffect, useRef } from "react";
+import { CircleCheck } from "lucide-react";
 import accredianProfessionals from "@/assets/accredian_professionals.png";
+import { useEnquiryModal } from "@/hooks/useEnquiryModal";
 
 /* ─── CountUp (triggers on view) ─── */
 function CountUp({
@@ -51,164 +53,6 @@ function CountUp({
   );
 }
 
-/* ─── Animated Chart ─── */
-function ChartLine() {
-  return (
-    <svg viewBox="0 0 300 80" className="h-full w-full">
-      <defs>
-        <linearGradient id="hero-area" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <motion.path
-        d="M0,60 C30,55 50,40 80,45 C110,50 130,20 160,25 C190,30 210,15 240,12 C260,10 280,20 300,15"
-        fill="none"
-        stroke="var(--primary)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
-      />
-      <motion.path
-        d="M0,60 C30,55 50,40 80,45 C110,50 130,20 160,25 C190,30 210,15 240,12 C260,10 280,20 300,15 L300,80 L0,80 Z"
-        fill="url(#hero-area)"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-      />
-    </svg>
-  );
-}
-
-/* ─── Animated Progress Bar ─── */
-function ProgressBar({ value, delay = 0 }: { value: number; delay?: number }) {
-  return (
-    <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-border/50">
-      <motion.div
-        className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-primary to-primary/70"
-        initial={{ width: 0 }}
-        whileInView={{ width: `${value}%` }}
-        viewport={{ once: true }}
-        transition={{ delay, duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-      />
-    </div>
-  );
-}
-
-/* ─── Magnetic CTA Button ─── */
-function MagneticCTA({
-  href,
-  children,
-  className,
-}: {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 250, damping: 18, mass: 0.4 });
-  const springY = useSpring(y, { stiffness: 250, damping: 18, mass: 0.4 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    x.set((e.clientX - cx) * 0.18);
-    y.set((e.clientY - cy) * 0.18);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.a
-      ref={ref}
-      href={href}
-      className={className}
-      style={{ x: springX, y: springY }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {children}
-    </motion.a>
-  );
-}
-
-/* ─── Animated Arrow ─── */
-function AnimatedArrow() {
-  return (
-    <span className="relative ml-1 inline-flex items-center overflow-hidden">
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        fill="none"
-        className="transition-transform duration-500 ease-out group-hover:translate-x-1"
-      >
-        <path
-          d="M4 9h10M10 5l4 4-4 4"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="transition-all duration-500 group-hover:[d:path('M6_9h8M11_5l4_4-4_4')]"
-        />
-      </svg>
-    </span>
-  );
-}
-
-/* ─── Floating Particles ─── */
-function Particles({ count = 12 }: { count?: number }) {
-  const particles = useMemo(
-    () =>
-      Array.from({ length: count }, (_, i) => ({
-        id: i,
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        size: 1 + Math.random() * 1.5,
-        duration: 25 + Math.random() * 35,
-        delay: Math.random() * 20,
-        driftX: (Math.random() - 0.5) * 80,
-        driftY: -30 - Math.random() * 60,
-        opacity: 0.08 + Math.random() * 0.1,
-      })),
-    [count],
-  );
-
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="absolute rounded-full bg-primary/30"
-          style={
-            {
-              left: p.left,
-              top: p.top,
-              width: p.size,
-              height: p.size,
-              "--drift-x": `${p.driftX}px`,
-              "--drift-y": `${p.driftY}px`,
-              "--particle-opacity": p.opacity,
-              animation: `particle-drift ${p.duration}s ${p.delay}s ease-in-out infinite`,
-            } as React.CSSProperties
-          }
-        />
-      ))}
-    </div>
-  );
-}
-
 const stagger: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
@@ -223,199 +67,144 @@ const fadeUp: Variants = {
   },
 };
 
-const partners = ["Reliance", "HCL", "IBM", "CRIF", "ADP", "Bayer", "Deloitte", "Cognizant"];
+const fadeRight: Variants = {
+  hidden: { opacity: 0, x: 40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { delay: 0.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const features = [
+  "Tailored Solutions",
+  "Industry Insights",
+  "Expert Guidance",
+];
 
 export function Hero() {
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const smx = useSpring(mx, { stiffness: 50, damping: 25, mass: 0.8 });
-  const smy = useSpring(my, { stiffness: 50, damping: 25, mass: 0.8 });
-  const rotY = useTransform(smx, [-1, 1], [3, -3]);
-  const rotX = useTransform(smy, [-1, 1], [-2, 2]);
-  const tx = useTransform(smx, [-1, 1], [-8, 8]);
-  const ty = useTransform(smy, [-1, 1], [-6, 6]);
-
-  // Independent parallax for each floating card (subtle)
-  const card1X = useTransform(smx, [-1, 1], [8, -8]);
-  const card1Y = useTransform(smy, [-1, 1], [6, -6]);
-  const card2X = useTransform(smx, [-1, 1], [-10, 10]);
-  const card2Y = useTransform(smy, [-1, 1], [-8, 8]);
-  const card3X = useTransform(smx, [-1, 1], [-6, 6]);
-  const card3Y = useTransform(smy, [-1, 1], [4, -4]);
+  const { openModal } = useEnquiryModal();
 
   return (
-    <section
-      id="top"
-      onMouseMove={(e) => {
-        const r = e.currentTarget.getBoundingClientRect();
-        mx.set(((e.clientX - r.left) / r.width) * 2 - 1);
-        my.set(((e.clientY - r.top) / r.height) * 2 - 1);
-      }}
-      className="relative overflow-hidden pt-32 pb-10 md:pt-40 md:pb-16 lg:min-h-[85vh] flex flex-col justify-between"
-    >
-      {/* ── Background layers ── */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        {/* Soft radial glow centered under the professionals side */}
-        <div className="absolute right-[5%] lg:right-[15%] top-[10%] h-[600px] w-[800px] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--primary)_12%,transparent),transparent)] blur-3xl" />
+    <section id="top" className="pt-28 pb-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#f4faff] rounded-[2.5rem] relative flex flex-col md:flex-row items-stretch min-h-[520px] overflow-hidden shadow-sm">
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#3182ce] opacity-[0.06] blur-[80px]" />
+          <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full bg-[#63b3ed] opacity-[0.08] blur-[60px]" />
+          <svg className="absolute inset-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#3182ce" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
 
-        {/* Faint ambient top light */}
-        <div className="absolute left-[10%] top-[-10%] h-[400px] w-[600px] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--primary)_4%,transparent),transparent)] blur-3xl" />
-
-        {/* Fade to surface */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_60%,var(--surface-1))]" />
-
-        {/* Dot grid */}
-        <svg
-          className="absolute inset-0 h-full w-full opacity-[0.25]"
-          xmlns="http://www.w3.org/2000/svg"
+        {/* ── Left Column: Text & CTA (55%) ── */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+          className="relative z-10 flex flex-col justify-center md:w-[55%] px-8 sm:px-12 py-14 md:py-16"
         >
-          <defs>
-            <pattern id="hero-dot-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="0.6" fill="currentColor" className="text-foreground/20" />
-            </pattern>
-            <radialGradient id="hero-grid-fade" cx="50%" cy="40%" r="60%">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="0" />
-            </radialGradient>
-            <mask id="hero-grid-mask">
-              <rect width="100%" height="100%" fill="url(#hero-grid-fade)" />
-            </mask>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hero-dot-grid)" mask="url(#hero-grid-mask)" />
-        </svg>
-
-        <Particles count={10} />
-      </div>
-
-      <div className="mx-auto max-w-7xl px-6 w-full flex-grow flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center py-8">
-          {/* ── Left Column: Text & CTA Content ── */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="show"
-            className="lg:col-span-6 flex flex-col items-start text-left"
-          >
-            {/* Badge pill */}
-            <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-[12px] font-medium tracking-wide text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/40" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-                </span>
-                Enterprise Learning · Purpose‑built for teams
+          {/* Badge */}
+          <motion.div variants={fadeUp}>
+            <span className="inline-flex items-center gap-2 bg-white border border-blue-100 rounded-full px-4 py-1.5 mb-8 w-fit shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#38a169]/40" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#38a169]" />
               </span>
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h1
-              variants={fadeUp}
-              className="mt-6 text-balance text-[44px] font-bold leading-[1.08] tracking-[-0.035em] md:text-[60px] lg:text-[64px]"
-            >
-              Next-Gen <span className="text-primary">Expertise</span>
-              <br />
-              For Your <span className="text-primary">Enterprise.</span>
-            </motion.h1>
-
-            {/* Subtitle */}
-            <motion.p
-              variants={fadeUp}
-              className="mt-6 max-w-xl text-[16px] leading-[1.65] text-muted-foreground md:text-[17px]"
-            >
-              Cultivate high‑performance teams through expert learning — tailored solutions,
-              industry insights, and measurable impact.
-            </motion.p>
-
-            {/* Trust checkmarks */}
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3.5 text-[13.5px] text-muted-foreground"
-            >
-              {[
-                { text: "Tailored Solutions", color: "text-emerald-500" },
-                { text: "Industry Insights", color: "text-emerald-500" },
-                { text: "Expert Guidance", color: "text-emerald-500" },
-                { text: "Measurable Impact", color: "text-emerald-500" },
-              ].map((f) => (
-                <span key={f.text} className="inline-flex items-center gap-2.5">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/10">
-                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                      <path
-                        d="M2.5 6.5L5 9L9.5 3.5"
-                        stroke="rgb(16, 185, 129)"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  <span className="font-medium text-foreground/80">{f.text}</span>
-                </span>
-              ))}
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
-              <MagneticCTA
-                href="#contact"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_4px_14px_-2px_rgba(0,102,255,0.4)] transition-all duration-300 hover:shadow-[0_8px_20px_-2px_rgba(0,102,255,0.5)]"
-              >
-                {/* Highlight Sweep */}
-                <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent)] transition-transform duration-700 ease-out group-hover:translate-x-full" />
-                <span className="relative">Enquire Now</span>
-                <AnimatedArrow />
-              </MagneticCTA>
-
-              <MagneticCTA
-                href="#edge"
-                className="group inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/50 px-7 py-3.5 text-[15px] font-medium text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.04)] backdrop-blur-xl transition-all duration-300 hover:border-foreground/20 hover:bg-background/80"
-              >
-                Explore programs
-              </MagneticCTA>
-            </motion.div>
+              <span className="text-sm font-semibold text-[#2d3748] tracking-wide">
+                Trusted by 200+ Enterprises
+              </span>
+            </span>
           </motion.div>
 
-          {/* ── Right Column: Professionals Collage & Floating Cards ── */}
-          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end min-h-[450px] lg:min-h-[500px] px-4 md:px-12 lg:px-0">
-            {/* Soft backdrop glow behind image */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,102,255,0.06)_0%,transparent_65%)] pointer-events-none" />
+          {/* Headline */}
+          <motion.h1
+            variants={fadeUp}
+            className="text-[2.8rem] sm:text-[3.2rem] lg:text-[3.6rem] font-bold text-[#1a202c] leading-[1.08] mb-6"
+          >
+            Next-Gen{" "}
+            <span className="relative inline-block">
+              <span className="text-[#3182ce]">Expertise</span>
+              <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-[#3182ce] rounded-full opacity-30" />
+            </span>
+            <br />
+            For Your{" "}
+            <span className="relative inline-block">
+              <span className="text-[#3182ce]">Enterprise</span>
+              <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-[#3182ce] rounded-full opacity-30" />
+            </span>
+          </motion.h1>
 
-            {/* Professionals Cutout Illustration */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-              style={{ rotateX: rotX, rotateY: rotY, x: tx, y: ty, transformStyle: "preserve-3d" }}
-              className="relative w-full max-w-[420px] lg:max-w-[460px] z-10 animate-float-dashboard"
-            >
-              <img
-                src={accredianProfessionals}
-                alt="Accredian Enterprise Professionals"
-                width={800}
-                height={800}
-                className="w-full h-auto object-contain drop-shadow-[0_12px_40px_rgba(0,102,255,0.08)] rounded-2xl"
-              />
-            </motion.div>
+          {/* Subtitle */}
+          <motion.p
+            variants={fadeUp}
+            className="text-[1.2rem] sm:text-[1.3rem] text-[#4a5568] mb-8 font-medium leading-relaxed"
+          >
+            Cultivate high‑performance teams
+            <br className="hidden sm:block" />
+            {" "}through expert learning.
+          </motion.p>
 
-
-          </div>
-        </div>
-      </div>
-
-      {/* ── Subtle Trust Row at Bottom of Hero ── */}
-      <div className="w-full border-t border-border/50 bg-background/30 py-4 backdrop-blur-[2px]">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
-            Empowering Teams At Leading Global Enterprises
-          </p>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-[0.45] grayscale hover:opacity-75 transition-opacity duration-300">
-            {partners.map((p) => (
-              <span key={p} className="text-[14.5px] font-bold tracking-tight text-foreground">
-                {p}
-              </span>
+          {/* Trust checkmarks */}
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-x-6 gap-y-3 mb-10">
+            {features.map((f) => (
+              <div key={f} className="flex items-center gap-2">
+                <CircleCheck className="text-[#38a169] w-5 h-5 shrink-0" strokeWidth={2.5} />
+                <span className="text-[#2d3748] font-medium text-base sm:text-lg">{f}</span>
+              </div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div variants={fadeUp}>
+            <button
+              onClick={() => openModal()}
+              className="bg-[#3182ce] text-white px-9 py-3.5 rounded-xl font-semibold text-lg shadow-[0_4px_20px_rgba(49,130,206,0.35)] transition-all duration-300 hover:bg-[#2b6cb0] hover:shadow-[0_8px_28px_rgba(49,130,206,0.45)] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#3182ce]/50 focus:ring-offset-2"
+            >
+              Enquire Now
+            </button>
+          </motion.div>
+        </motion.div>
+
+        {/* ── Right Column: Image (45%) ── */}
+        <motion.div
+          variants={fadeRight}
+          initial="hidden"
+          animate="show"
+          className="relative z-10 w-full md:w-[45%] h-64 sm:h-80 md:h-auto flex-shrink-0"
+        >
+          {/* Corner accent */}
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#3182ce] opacity-10 rounded-bl-[2.5rem] rounded-tr-[2.5rem]" />
+
+          <img
+            src={accredianProfessionals}
+            alt="Enterprise professionals"
+            className="absolute inset-0 w-full h-full object-cover object-center md:object-top rounded-b-[2.5rem] md:rounded-bl-none md:rounded-tr-[2.5rem] md:rounded-br-[2.5rem]"
+          />
+
+          {/* Floating stat card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute bottom-6 left-4 sm:left-6 bg-white rounded-2xl px-5 py-3.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-center gap-3 z-20"
+          >
+            <div className="w-10 h-10 rounded-full bg-[#ebf8ff] flex items-center justify-center shrink-0">
+              <span className="text-[#3182ce] text-lg font-bold">🎓</span>
+            </div>
+            <div>
+              <p className="text-[#1a202c] font-bold text-sm leading-tight">
+                <CountUp to={10000} suffix="+ Trained" />
+              </p>
+              <p className="text-[#718096] text-xs font-medium">Professionals worldwide</p>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

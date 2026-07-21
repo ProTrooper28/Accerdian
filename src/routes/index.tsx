@@ -17,13 +17,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Accredian Enterprise — Next-Gen Expertise for Your Enterprise" },
+      { title: "Accredian | Next-Gen Expertise For Your Enterprise" },
       {
         name: "description",
         content:
           "Tailored corporate training for high-performance teams. Leadership, Tech & Data, Gen-AI, Fintech, and more — measured by outcome.",
       },
-      { property: "og:title", content: "Accredian Enterprise" },
+      { property: "og:title", content: "Accredian | Next-Gen Expertise For Your Enterprise" },
       {
         property: "og:description",
         content: "Enterprise learning that compounds — tailored programs, measurable impact.",
