@@ -235,15 +235,13 @@ export function Hero() {
   const tx = useTransform(smx, [-1, 1], [-8, 8]);
   const ty = useTransform(smy, [-1, 1], [-6, 6]);
 
-  // Independent parallax for each floating card
-  const card1X = useTransform(smx, [-1, 1], [15, -15]);
-  const card1Y = useTransform(smy, [-1, 1], [10, -10]);
-  const card2X = useTransform(smx, [-1, 1], [-18, 18]);
-  const card2Y = useTransform(smy, [-1, 1], [-12, 12]);
-  const card3X = useTransform(smx, [-1, 1], [-10, 10]);
-  const card3Y = useTransform(smy, [-1, 1], [8, -8]);
-  const card4X = useTransform(smx, [-1, 1], [12, -12]);
-  const card4Y = useTransform(smy, [-1, 1], [-8, 8]);
+  // Independent parallax for each floating card (subtle)
+  const card1X = useTransform(smx, [-1, 1], [8, -8]);
+  const card1Y = useTransform(smy, [-1, 1], [6, -6]);
+  const card2X = useTransform(smx, [-1, 1], [-10, 10]);
+  const card2Y = useTransform(smy, [-1, 1], [-8, 8]);
+  const card3X = useTransform(smx, [-1, 1], [-6, 6]);
+  const card3Y = useTransform(smy, [-1, 1], [4, -4]);
 
   return (
     <section
@@ -378,9 +376,9 @@ export function Hero() {
           </motion.div>
 
           {/* ── Right Column: Professionals Collage & Floating Cards ── */}
-          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end min-h-[420px] lg:min-h-[500px]">
-            {/* Soft backdrop glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,102,255,0.08)_0%,transparent_65%)] pointer-events-none" />
+          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end min-h-[450px] lg:min-h-[500px] px-4 md:px-12 lg:px-0">
+            {/* Soft backdrop glow behind image */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,102,255,0.06)_0%,transparent_65%)] pointer-events-none" />
 
             {/* Professionals Cutout Illustration */}
             <motion.div
@@ -388,87 +386,57 @@ export function Hero() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
               style={{ rotateX: rotX, rotateY: rotY, x: tx, y: ty, transformStyle: "preserve-3d" }}
-              className="relative w-full max-w-[450px] lg:max-w-[480px] z-10 animate-float-dashboard"
+              className="relative w-full max-w-[420px] lg:max-w-[460px] z-10 animate-float-dashboard"
             >
               <img
                 src={accredianProfessionals}
                 alt="Accredian Enterprise Professionals"
                 width={800}
                 height={800}
-                className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,102,255,0.12)]"
+                className="w-full h-auto object-contain drop-shadow-[0_12px_40px_rgba(0,102,255,0.08)] rounded-2xl"
               />
             </motion.div>
 
-            {/* ── Floating Widget 1: Learning Analytics Card (Top Left) ── */}
+            {/* ── Floating Widget 1: Learning Analytics Card (Aligned Top Left outside faces) ── */}
             <motion.div
-              initial={{ opacity: 0, x: -30, y: -20 }}
+              initial={{ opacity: 0, x: -20, y: -10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.7, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-[-32px] lg:left-[-54px] top-[15%] z-20 hidden sm:block w-48 animate-float-card-1"
+              className="absolute left-[-20px] lg:left-[-40px] top-[6%] z-20 hidden md:block w-44 animate-float-card-1"
               style={{ x: card1X, y: card1Y }}
             >
-              <div className="rounded-xl border border-border/40 bg-background/70 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl">
+              <div className="rounded-xl border border-border/40 bg-background/80 p-3 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.05),0_16px_32px_-12px_rgba(15,23,42,0.08)] backdrop-blur-md">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
                     Active Learners
                   </span>
-                  <span className="relative flex h-2 w-2">
+                  <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 animate-ripple" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
                   </span>
                 </div>
-                <div className="mt-1.5 text-[24px] font-bold tracking-tight text-foreground">
+                <div className="mt-1 text-[20px] font-bold tracking-tight text-foreground">
                   <CountUp to={5240} />
                 </div>
-                <div className="mt-2.5 h-6">
+                <div className="mt-1.5 h-5">
                   <ChartLine />
                 </div>
               </div>
             </motion.div>
 
-            {/* ── Floating Widget 2: Certification Badge (Bottom Left) ── */}
+            {/* ── Floating Widget 2: AI Learning Insights (Aligned Bottom Left below image focal point) ── */}
             <motion.div
-              initial={{ opacity: 0, x: -30, y: 30 }}
+              initial={{ opacity: 0, x: -20, y: 15 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.85, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-[-20px] lg:left-[-36px] bottom-[15%] z-20 hidden sm:block w-44 animate-float-card-2"
+              className="absolute left-[-10px] lg:left-[-24px] bottom-[10%] z-20 hidden md:block w-44 animate-float-card-2"
               style={{ x: card2X, y: card2Y }}
             >
-              <div className="rounded-xl border border-border/45 bg-background/75 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl flex items-center gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <div className="rounded-xl border border-border/40 bg-background/80 p-3 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.05),0_16px_32px_-12px_rgba(15,23,42,0.08)] backdrop-blur-md">
+                <div className="flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-wider text-primary">
                   <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
-                    Programs
-                  </div>
-                  <div className="text-[13px] font-bold text-foreground">Accredian Certified</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* ── Floating Widget 3: AI Learning Insights (Top Right) ── */}
-            <motion.div
-              initial={{ opacity: 0, x: 30, y: -30 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-[-32px] lg:right-[-54px] top-[8%] z-20 hidden sm:block w-48 animate-float-card-3"
-              style={{ x: card3X, y: card3Y }}
-            >
-              <div className="rounded-xl border border-border/40 bg-background/70 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl">
-                <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                  <svg
-                    width="11"
-                    height="11"
+                    width="10"
+                    height="10"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -476,33 +444,33 @@ export function Hero() {
                   >
                     <path d="m12 3-1.912 5.886L4.202 9l5.886 1.912L12 21l1.912-5.886L19.798 15l-5.886-1.912z" />
                   </svg>
-                  AI Skill Insights
+                  AI Insights
                 </div>
-                <div className="mt-1.5 text-[13px] font-bold text-foreground leading-tight">
-                  GenAI Readiness up +14%
+                <div className="mt-1 text-[12px] font-bold text-foreground leading-tight">
+                  GenAI Skill up +14%
                 </div>
-                <div className="mt-1 text-[10px] text-muted-foreground">across tech org</div>
+                <div className="mt-0.5 text-[9px] text-muted-foreground">across organization</div>
               </div>
             </motion.div>
 
-            {/* ── Floating Widget 4: Completion Widget (Bottom Right) ── */}
+            {/* ── Floating Widget 3: Completion Widget (Aligned Top Right outside faces) ── */}
             <motion.div
-              initial={{ opacity: 0, x: 30, y: 20 }}
+              initial={{ opacity: 0, x: 20, y: -10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ delay: 1.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-[-24px] lg:right-[-42px] bottom-[20%] z-20 hidden sm:block w-48 animate-float-card-4"
-              style={{ x: card4X, y: card4Y }}
+              transition={{ delay: 1.0, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute right-[-10px] lg:right-[-32px] top-[12%] z-20 hidden md:block w-44 animate-float-card-3"
+              style={{ x: card3X, y: card3Y }}
             >
-              <div className="rounded-xl border border-border/40 bg-background/70 p-3.5 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.06),0_16px_40px_-12px_rgba(15,23,42,0.1)] backdrop-blur-xl">
+              <div className="rounded-xl border border-border/40 bg-background/80 p-3 shadow-[0_4px_12px_-2px_rgba(15,23,42,0.05),0_16px_32px_-12px_rgba(15,23,42,0.08)] backdrop-blur-md">
                 <div className="flex justify-between items-baseline">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
                     Completion
                   </span>
-                  <span className="text-[14px] font-bold text-primary">
+                  <span className="text-[12px] font-bold text-primary">
                     <CountUp to={94} suffix="%" />
                   </span>
                 </div>
-                <div className="mt-2">
+                <div className="mt-1.5">
                   <ProgressBar value={94} delay={1.4} />
                 </div>
               </div>
