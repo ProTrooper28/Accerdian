@@ -13,7 +13,10 @@ export function CTA() {
         >
           <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(50%_60%_at_50%_0%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_70%)]" />
-            <svg className="absolute inset-0 h-full w-full opacity-40" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              className="absolute inset-0 h-full w-full opacity-40"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <defs>
                 <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
                   <circle cx="1" cy="1" r="1" fill="currentColor" className="text-border" />
@@ -33,7 +36,8 @@ export function CTA() {
             <span className="text-muted-foreground">our training solutions?</span>
           </h2>
           <p className="mx-auto mt-5 max-w-md text-[15.5px] leading-relaxed text-muted-foreground">
-            Get expert guidance for your team's success. A learning partner will reach out within 24 hours.
+            Get expert guidance for your team's success. A learning partner will reach out within 24
+            hours.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">

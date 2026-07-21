@@ -41,10 +41,20 @@ export function Testimonials() {
         <SectionHeading
           align="center"
           eyebrow="Testimonials"
-          title={<>What our clients <span className="text-muted-foreground">are saying.</span></>}
+          title={
+            <>
+              What our clients <span className="text-muted-foreground">are saying.</span>
+            </>
+          }
         />
 
-        <div className="relative mx-auto mt-16 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96, y: 24 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.9, ease: easeOut }}
+          className="relative mx-auto mt-16 max-w-4xl"
+        >
           <svg
             className="mx-auto mb-6 h-8 w-8 text-primary/40"
             viewBox="0 0 32 32"
@@ -87,7 +97,7 @@ export function Testimonials() {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

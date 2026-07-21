@@ -1,4 +1,5 @@
-import { SectionHeading } from "./util";
+import { motion } from "motion/react";
+import { SectionHeading, easeOut } from "./util";
 
 const partners = ["Reliance", "HCL", "IBM", "CRIF", "ADP", "Bayer", "Deloitte", "Cognizant"];
 
@@ -20,13 +21,19 @@ export function Partners() {
           title={<>Successful collaborations with the industry's best.</>}
         />
 
-        <div className="relative mt-14 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+        <motion.div
+          initial={{ opacity: 0, y: 24, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: easeOut }}
+          className="relative mt-14 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+        >
           <div className="flex w-max animate-marquee">
             {[...partners, ...partners].map((p, i) => (
               <Logo key={i} name={p} />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -3,9 +3,21 @@ import { SectionHeading, easeOut } from "./util";
 
 const segments = [
   { t: "Program Specific", d: "Certificate, Executive, Post Graduate Certificate", tag: "Format" },
-  { t: "Industry Specific", d: "IT, Healthcare, Retail, Finance, Education, Manufacturing", tag: "Vertical" },
-  { t: "Topic Specific", d: "Machine Learning, Design, Analytics, Cybersecurity, Cloud", tag: "Skill" },
-  { t: "Level Specific", d: "Senior Leadership, Mid‑Career Professionals, Freshers", tag: "Seniority" },
+  {
+    t: "Industry Specific",
+    d: "IT, Healthcare, Retail, Finance, Education, Manufacturing",
+    tag: "Vertical",
+  },
+  {
+    t: "Topic Specific",
+    d: "Machine Learning, Design, Analytics, Cybersecurity, Cloud",
+    tag: "Skill",
+  },
+  {
+    t: "Level Specific",
+    d: "Senior Leadership, Mid‑Career Professionals, Freshers",
+    tag: "Seniority",
+  },
 ];
 
 export function Segments() {
@@ -14,16 +26,21 @@ export function Segments() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Tailored Course Segmentation"
-          title={<>Custom‑fit courses designed to <span className="text-muted-foreground">address every focus.</span></>}
+          title={
+            <>
+              Custom‑fit courses designed to{" "}
+              <span className="text-muted-foreground">address every focus.</span>
+            </>
+          }
         />
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
           {segments.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: (i % 2) * 0.08, duration: 0.7, ease: easeOut }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -32 : 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: (i % 2) * 0.08, duration: 0.8, ease: easeOut }}
               className={`group relative overflow-hidden rounded-2xl border border-border p-8 md:p-10 ${
                 i % 2 === 0 ? "bg-background" : "bg-surface-1"
               }`}
@@ -42,7 +59,9 @@ export function Segments() {
               </div>
               <div className="mt-8 inline-flex items-center gap-1.5 text-[13.5px] text-foreground/80 transition-colors group-hover:text-foreground">
                 View programs
-                <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+                <span className="transition-transform duration-500 group-hover:translate-x-1">
+                  →
+                </span>
               </div>
               <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--primary)_12%,transparent),transparent)] opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100" />
             </motion.div>

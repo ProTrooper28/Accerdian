@@ -17,10 +17,21 @@ export function Audience() {
         <SectionHeading
           align="center"
           eyebrow="Who Should Join?"
-          title={<>Strategic skill enhancement, <span className="text-muted-foreground">by career stage.</span></>}
+          title={
+            <>
+              Strategic skill enhancement,{" "}
+              <span className="text-muted-foreground">by career stage.</span>
+            </>
+          }
         />
         <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: easeOut }}
+            className="md:col-span-5"
+          >
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-background">
               <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_20%,color-mix(in_oklab,var(--primary)_16%,transparent),transparent_70%)]" />
               <motion.div
@@ -32,9 +43,7 @@ export function Audience() {
               >
                 <div>
                   <div className="mx-auto grid h-24 w-24 place-items-center rounded-2xl border border-border bg-background/70 backdrop-blur">
-                    <div className="text-[36px]">
-                      {["◐", "◑", "◒", "◓"][active]}
-                    </div>
+                    <div className="text-[36px]">{["◐", "◑", "◒", "◓"][active]}</div>
                   </div>
                   <div className="mt-8 text-[24px] font-medium tracking-[-0.02em] md:text-[28px]">
                     {groups[active].t}
@@ -45,12 +54,16 @@ export function Audience() {
                 </div>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
           <div className="md:col-span-7">
             <div className="flex flex-col">
               {groups.map((g, i) => (
-                <button
+                <motion.button
                   key={i}
+                  initial={{ opacity: 0, x: 24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ delay: i * 0.08, duration: 0.7, ease: easeOut }}
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
@@ -78,7 +91,7 @@ export function Audience() {
                       transition={{ duration: 0.5, ease: easeOut }}
                     />
                   )}
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>

@@ -48,10 +48,20 @@ export function FAQ() {
     <section id="faq" className="relative py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
-          <div className="md:col-span-4">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: easeOut }}
+            className="md:col-span-4"
+          >
             <SectionHeading
               eyebrow="Frequently Asked"
-              title={<>Answers, before <span className="text-muted-foreground">you ask.</span></>}
+              title={
+                <>
+                  Answers, before <span className="text-muted-foreground">you ask.</span>
+                </>
+              }
             />
             <div className="mt-10 flex flex-col gap-1">
               {groups.map((g, i) => (
@@ -62,7 +72,9 @@ export function FAQ() {
                     setOpen(0);
                   }}
                   className={`relative rounded-lg px-3 py-2.5 text-left text-[14px] transition-colors ${
-                    tab === i ? "bg-surface-1 text-foreground" : "text-muted-foreground hover:text-foreground"
+                    tab === i
+                      ? "bg-surface-1 text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <span className="font-mono text-[11px] text-muted-foreground">0{i + 1}</span>
@@ -70,9 +82,15 @@ export function FAQ() {
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="md:col-span-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: easeOut }}
+            className="md:col-span-8"
+          >
             <div className="divide-y divide-border rounded-2xl border border-border bg-background">
               {groups[tab].items.map((it, i) => {
                 const isOpen = open === i;
@@ -115,7 +133,7 @@ export function FAQ() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

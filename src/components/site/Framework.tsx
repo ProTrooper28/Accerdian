@@ -38,18 +38,32 @@ export function Framework() {
           <div className="md:col-span-5">
             <SectionHeading
               eyebrow="The CAT Framework"
-              title={<>Our proven approach to <span className="text-muted-foreground">learning excellence.</span></>}
+              title={
+                <>
+                  Our proven approach to{" "}
+                  <span className="text-muted-foreground">learning excellence.</span>
+                </>
+              }
               desc="A three‑part operating system that turns learning intent into measurable capability."
             />
             <div className="mt-10 grid grid-cols-3 gap-4">
-              {cat.map((c) => (
-                <div key={c.k} className="rounded-xl border border-border bg-surface-1 p-4">
+              {cat.map((c, idx) => (
+                <motion.div
+                  key={c.k}
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ delay: idx * 0.08, duration: 0.8, ease: easeOut }}
+                  className="rounded-xl border border-border bg-surface-1 p-4"
+                >
                   <div className="text-[32px] font-medium leading-none tracking-[-0.03em] text-primary">
                     {c.k}
                   </div>
                   <div className="mt-3 text-[14px] font-medium">{c.t}</div>
-                  <div className="mt-1 text-[12.5px] leading-relaxed text-muted-foreground">{c.d}</div>
-                </div>
+                  <div className="mt-1 text-[12.5px] leading-relaxed text-muted-foreground">
+                    {c.d}
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>

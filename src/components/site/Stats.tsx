@@ -3,8 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import { SectionHeading, easeOut } from "./util";
 
 const stats = [
-  { value: 10000, suffix: "+", label: "Professionals trained", note: "for exceptional career success" },
-  { value: 200, suffix: "+", label: "Sessions delivered", note: "with unmatched learning excellence" },
+  {
+    value: 10000,
+    suffix: "+",
+    label: "Professionals trained",
+    note: "for exceptional career success",
+  },
+  {
+    value: 200,
+    suffix: "+",
+    label: "Sessions delivered",
+    note: "with unmatched learning excellence",
+  },
   { value: 5000, suffix: "+", label: "Active learners", note: "engaged in dynamic courses" },
 ];
 
@@ -27,7 +37,12 @@ function AnimatedNumber({ to, suffix }: { to: number; suffix: string }) {
     return () => cancelAnimationFrame(raf);
   }, [inView, to]);
   const display = to >= 1000 ? `${Math.floor(v / 1000)}${v >= 1000 ? "K" : ""}` : `${v}`;
-  return <span ref={ref}>{display}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {display}
+      {suffix}
+    </span>
+  );
 }
 
 export function Stats() {
@@ -36,7 +51,11 @@ export function Stats() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Our Track Record"
-          title={<>The numbers behind <span className="text-muted-foreground">our success.</span></>}
+          title={
+            <>
+              The numbers behind <span className="text-muted-foreground">our success.</span>
+            </>
+          }
         />
 
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">

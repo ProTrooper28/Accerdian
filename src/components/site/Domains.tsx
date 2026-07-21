@@ -2,10 +2,18 @@ import { motion } from "motion/react";
 import { SectionHeading, easeOut } from "./util";
 
 const domains = [
-  { t: "Product & Innovation Hub", d: "Frameworks for shipping category‑defining products.", icon: "◇" },
+  {
+    t: "Product & Innovation Hub",
+    d: "Frameworks for shipping category‑defining products.",
+    icon: "◇",
+  },
   { t: "Gen‑AI Mastery", d: "Applied generative AI for teams building today.", icon: "✦" },
   { t: "Leadership Elevation", d: "Executive presence, decision quality, and scale.", icon: "◈" },
-  { t: "Tech & Data Insights", d: "Modern data stacks, ML systems, and platform thinking.", icon: "◉" },
+  {
+    t: "Tech & Data Insights",
+    d: "Modern data stacks, ML systems, and platform thinking.",
+    icon: "◉",
+  },
   { t: "Operations Excellence", d: "Systems, throughput, and continuous improvement.", icon: "◎" },
   { t: "Digital Enterprise", d: "Cloud‑native transformation across the org.", icon: "◍" },
   { t: "Fintech Innovation Lab", d: "Payments, risk, and financial infrastructure.", icon: "◐" },
@@ -25,10 +33,10 @@ export function Domains() {
             <motion.a
               href="#contact"
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: (i % 3) * 0.06, duration: 0.7, ease: easeOut }}
+              initial={{ opacity: 0, scale: 0.94 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: (i % 3) * 0.08, duration: 0.8, ease: easeOut }}
               className="group relative overflow-hidden rounded-2xl border border-border bg-background p-7 transition-all duration-500 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-[0_20px_60px_-20px_rgba(15,23,42,0.15)]"
             >
               <div className="flex items-start justify-between">
