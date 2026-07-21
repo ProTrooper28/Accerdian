@@ -1,12 +1,13 @@
 import { motion } from "motion/react";
 import { useState } from "react";
+import { Code, Briefcase, Rocket, Crown } from "lucide-react";
 import { SectionHeading, easeOut } from "./util";
 
 const groups = [
-  { t: "Tech Professionals", d: "Enhance expertise, embrace tech, drive innovation." },
-  { t: "Non‑Tech Professionals", d: "Adapt digitally, collaborate in tech environments." },
-  { t: "Emerging Professionals", d: "Develop powerful skills for rapid career growth." },
-  { t: "Senior Professionals", d: "Strengthen leadership, enhance strategic decisions." },
+  { t: "Tech Professionals", d: "Enhance expertise, embrace emerging tech, and drive innovation across engineering teams.", icon: <Code className="h-7 w-7" /> },
+  { t: "Non‑Tech Professionals", d: "Adapt digitally, collaborate effectively in tech-driven environments and grow cross-functional skills.", icon: <Briefcase className="h-7 w-7" /> },
+  { t: "Emerging Professionals", d: "Develop powerful foundational skills for rapid career growth and industry relevance.", icon: <Rocket className="h-7 w-7" /> },
+  { t: "Senior Professionals", d: "Strengthen executive leadership, enhance strategic decision-making and drive organizational change.", icon: <Crown className="h-7 w-7" /> },
 ];
 
 export function Audience() {
@@ -42,13 +43,13 @@ export function Audience() {
                 className="absolute inset-0 grid place-items-center p-8 text-center"
               >
                 <div>
-                  <div className="mx-auto grid h-24 w-24 place-items-center rounded-2xl border border-border bg-background/70 backdrop-blur">
-                    <div className="text-[36px]">{["◐", "◑", "◒", "◓"][active]}</div>
+                  <div className="mx-auto grid h-20 w-20 place-items-center rounded-2xl border border-primary/20 bg-gradient-to-b from-primary/10 to-primary/5 text-primary shadow-[0_0_20px_-4px_rgba(0,102,255,0.15)] backdrop-blur">
+                    {groups[active].icon}
                   </div>
-                  <div className="mt-6 text-[24px] font-medium tracking-[-0.02em] md:text-[28px]">
+                  <div className="mt-6 text-[22px] font-semibold tracking-[-0.02em] md:text-[26px]">
                     {groups[active].t}
                   </div>
-                  <div className="mt-3 max-w-xs mx-auto text-[14px] leading-relaxed text-muted-foreground">
+                  <div className="mt-2.5 max-w-xs mx-auto text-[14px] leading-relaxed text-muted-foreground">
                     {groups[active].d}
                   </div>
                 </div>
@@ -67,13 +68,23 @@ export function Audience() {
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
-                  className={`group relative border-t border-border py-6 text-left transition-colors ${
+                  className={`group relative border-t border-border py-5 text-left transition-all duration-300 ${
                     i === groups.length - 1 ? "border-b" : ""
-                  } ${active === i ? "text-foreground" : "text-muted-foreground"}`}
+                  } ${active === i ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
                 >
-                  <div className="flex items-baseline justify-between gap-6">
-                    <span className="font-mono text-[12px] text-muted-foreground">0{i + 1}</span>
-                    <span className="flex-1 text-[22px] font-medium tracking-[-0.02em] md:text-[26px]">
+                  {/* Active left accent */}
+                  {active === i && (
+                    <motion.div
+                      layoutId="audience-accent"
+                      className="absolute left-0 top-[20%] bottom-[20%] w-[2px] rounded-full bg-primary"
+                      transition={{ duration: 0.5, ease: easeOut }}
+                    />
+                  )}
+                  <div className="flex items-center justify-between gap-6 pl-4">
+                    <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-all duration-300 ${active === i ? "bg-primary/10 text-primary" : "bg-surface-1 text-muted-foreground"}`}>
+                      {g.icon ? <span className="scale-[0.55]">{groups[i].icon}</span> : null}
+                    </span>
+                    <span className="flex-1 text-[20px] font-semibold tracking-[-0.02em] md:text-[24px]">
                       {g.t}
                     </span>
                     <motion.span
@@ -87,7 +98,7 @@ export function Audience() {
                   {active === i && (
                     <motion.div
                       layoutId="audience-underline"
-                      className="absolute inset-x-0 -bottom-px h-px bg-foreground"
+                      className="absolute inset-x-0 -bottom-px h-px bg-primary/40"
                       transition={{ duration: 0.5, ease: easeOut }}
                     />
                   )}
